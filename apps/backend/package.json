@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "type": "module",
+  "scripts": {
+    "db:seed": "bunx tsx prisma/seed.ts",
+    "db:clear": "bunx prisma migrate reset --force --schema=prisma/schema.prisma",
+    "db:migrate": "bunx prisma migrate dev --name migrate --schema=prisma/schema.prisma",
+    "db:init": "bun run db:clear && bun run db:migrate && bun run db:seed",
+    "dev": "wrangler dev --port 8080",
+    "deploy": "wrangler deploy --minify"
+  },
+  "dependencies": {
+    "@hono/swagger-ui": "^0.5.2",
+    "@hono/zod-openapi": "^1.1.0",
+    "@hono/zod-validator": "^0.7.2",
+    "hono": "^4.9.7",
+    "zod": "^4.1.8",
+    "@faker-js/faker": "^10.0.0",
+    "@prisma/client": "^6.16.2",
+    "prisma": "^6.16.2"
+  },
+  "devDependencies": {
+    "wrangler": "^4.4.0"
+  }
+}
