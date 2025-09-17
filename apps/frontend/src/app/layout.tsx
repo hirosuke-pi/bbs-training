@@ -1,5 +1,4 @@
 import "@/constants/globals.css";
-import { Providers } from "./providers";
 
 export const metadata = {
   title: "BBS Training",
