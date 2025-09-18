@@ -8,21 +8,28 @@
     "start": "next start",
     "lint": "eslint",
     "sb": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "db:seed": "bunx tsx prisma/seed.ts",
+    "db:clear": "bunx prisma migrate reset --force --schema=prisma/schema.prisma",
+    "db:migrate": "bunx prisma migrate dev --name migrate --schema=prisma/schema.prisma",
+    "db:init": "bun run db:clear && bun run db:migrate && bun run db:seed"
   },
   "dependencies": {
+    "@hono/zod-validator": "^0.7.3",
     "@tanstack/react-query": "^5.89.0",
     "autoprefixer": "^10.4.21",
     "backend": "^0.0.0",
     "clsx": "^2.1.1",
     "hono": "^4.9.7",
+    "hono-sessions": "^0.8.0",
     "next": "15.5.3",
     "postcss": "^8.5.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-icons": "^5.5.0",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.1.13"
+    "tailwindcss": "^4.1.13",
+    "zod": "^4.1.9"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.1",

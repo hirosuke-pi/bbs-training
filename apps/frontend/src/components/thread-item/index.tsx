@@ -2,7 +2,7 @@ import React from "react";
 import { IoMdClose } from "react-icons/io";
 
 export type ThreadItemProps = {
-  totalPost: number; // 左側の番号
+  totalPosts: number; // 左側の番号
   title: string; // スレッドタイトル（太字）
   date: string; // 投稿日時表示
   hasRemove?: boolean; // 削除ボタン表示
@@ -10,7 +10,7 @@ export type ThreadItemProps = {
 };
 
 export const ThreadItem: React.FC<ThreadItemProps> = ({
-  totalPost,
+  totalPosts,
   title,
   date,
   hasRemove = false,
@@ -20,7 +20,7 @@ export const ThreadItem: React.FC<ThreadItemProps> = ({
     <div className="relative flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm h-30">
       {/* 左の番号バッジ */}
       <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-sky-300 text-3xl font-bold text-white">
-        {totalPost}
+        {totalPosts}
       </div>
       {/* 右側本文 */}
       <div className="flex-1">

@@ -1,8 +1,9 @@
 import "@/constants/globals.css";
+import { Providers } from "./providers";
 
 export const metadata = {
-  title: "BBS Training",
-  description: "Next.js + Bun + Hono サンプル",
+  title: "Forest BBS",
+  description: "Forest BBS",
 };
 
 export default function RootLayout({
@@ -12,8 +13,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
-        {children}
+      <body>
+        <div className="min-h-screen bg-gray-50 text-gray-900 antialiased">
+          <Providers>{children}</Providers>
+        </div>
       </body>
     </html>
   );

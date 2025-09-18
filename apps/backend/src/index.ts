@@ -1,12 +1,18 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { getEchoRouter } from "./api/echo";
-import { getHelloRouter } from "./api/hello";
+import { getThreadListAllRouter } from "./api/thread/all";
 
-const app = new Hono()
+import type { D1Database } from "@cloudflare/workers-types";
+
+type Bindings = {
+  DB: D1Database;
+};
+
+const app = new Hono<{ Bindings: Bindings }>()
   .basePath("/api/v1")
-  .route("/", getHelloRouter)
-  .route("/", getEchoRouter);
+  .route("/", getEchoRouter)
+  .route("/", getThreadListAllRouter);
 
 app.use(
   "*",
@@ -16,4 +22,7 @@ app.use(
 );
 
 export type AppType = typeof app;
-export default app;
+export default {
+  port: 8080,
+  fetch: app.fetch,
+};

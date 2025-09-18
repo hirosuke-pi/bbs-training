@@ -28,7 +28,14 @@ export const OpenControlled: Story = {
             await new Promise((r) => setTimeout(r, 500));
             console.log("submit", v);
           }}
-        />
+        >
+          <button
+            type="button"
+            className="rounded-lg bg-sky-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
+          >
+            スレッドを作成
+          </button>
+        </CreateThreadModal>
       </div>
     );
   },
@@ -46,7 +53,14 @@ export const Submitting: Story = {
           content: "本文",
           username: "名無し",
         }}
-      />
+      >
+        <button
+          type="button"
+          className="rounded-lg bg-sky-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
+        >
+          スレッドを作成
+        </button>
+      </CreateThreadModal>
     );
   },
 };
