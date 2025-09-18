@@ -1,20 +1,58 @@
 {
-  "name": "bbs-training",
-  "module": "index.ts",
-  "type": "module",
+  "name": "frontend",
+  "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "workspaces": [
-    "apps/*"
-  ],
   "scripts": {
-    "dev": "bun run --filter '*' dev"
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint",
+    "sb": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "db:seed": "bunx tsx ./prisma/seed.ts",
+    "db:clear": "bunx prisma migrate reset --force --schema=prisma/schema.prisma",
+    "db:migrate": "bunx prisma migrate dev --name migrate --schema=prisma/schema.prisma",
+    "db:init": "bun run db:clear && bun run db:migrate && bun run db:seed"
   },
   "dependencies": {
+    "@faker-js/faker": "^10.0.0",
+    "@hono/zod-validator": "^0.7.3",
+    "@prisma/client": "^6.16.2",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@tanstack/react-query": "^5.89.0",
+    "autoprefixer": "^10.4.21",
+    "backend": "^0.0.0",
+    "clsx": "^2.1.1",
+    "hono": "^4.9.7",
+    "hono-sessions": "^0.8.0",
+    "next": "15.5.3",
+    "postcss": "^8.5.6",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-icons": "^5.5.0",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.13",
+    "zod": "^4.1.9"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^4.1.1",
+    "@eslint/eslintrc": "^3",
+    "@storybook/addon-a11y": "^9.1.6",
+    "@storybook/addon-docs": "^9.1.6",
+    "@storybook/addon-vitest": "^9.1.6",
+    "@storybook/nextjs-vite": "^9.1.6",
+    "@tailwindcss/postcss": "^4.1.13",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitest/browser": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.3",
+    "eslint-plugin-storybook": "^9.1.6",
+    "playwright": "^1.55.0",
+    "storybook": "^9.1.6",
+    "typescript": "^5",
+    "vitest": "^3.2.4"
   }
 }
