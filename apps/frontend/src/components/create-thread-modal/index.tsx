@@ -15,7 +15,7 @@ export type CreateThreadModalProps = {
   onSubmit?: (values: CreateThreadValues) => Promise<void> | void;
   isSubmitting?: boolean;
   defaultValues?: Partial<CreateThreadValues>;
-  triggerLabel?: string;
+  children?: React.ReactNode;
 };
 
 const defaultForm: CreateThreadValues = {
@@ -31,7 +31,7 @@ export const CreateThreadModal: React.FC<CreateThreadModalProps> = ({
   onSubmit,
   isSubmitting = false,
   defaultValues,
-  triggerLabel = "スレッドを作成",
+  children,
 }) => {
   const [internalOpen, setInternalOpen] = useState(false);
   const isControlled = open !== undefined;
@@ -67,14 +67,7 @@ export const CreateThreadModal: React.FC<CreateThreadModalProps> = ({
 
   return (
     <Dialog.Root open={actualOpen} onOpenChange={setOpen}>
-      <Dialog.Trigger asChild>
-        <button
-          type="button"
-          className="rounded-lg bg-sky-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
-        >
-          {triggerLabel}
-        </button>
-      </Dialog.Trigger>
+      <Dialog.Trigger asChild>{children}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/30 backdrop-blur-sm data-[state=open]:animate-fadeIn" />
         <Dialog.Content className="fixed left-1/2 top-1/2 w-[min(100%-2rem,520px)] -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-white p-6 shadow-xl focus:outline-none data-[state=open]:animate-scaleIn">

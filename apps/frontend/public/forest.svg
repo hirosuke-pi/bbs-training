@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Simple forest silhouette (original work)
+  - Free to use in this project.
+  - Scales responsively with viewBox.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-label="Forest silhouette">
+  <defs>
+    <!-- A stylized pine silhouette. Built from simple points to evoke branches. -->
+    <symbol id="pine" viewBox="0 0 100 200">
+      <path d="M50 0
+               L63 22 L55 22
+               L73 48 L59 48
+               L80 75 L60 75
+               L88 100 L62 100
+               L92 125 L64 125
+               L95 150 L66 150
+               L98 175 L70 175
+               L100 200 L0 200
+               L30 160 L12 160
+               L38 130 L20 130
+               L40 105 L25 105
+               L42 82 L28 82
+               L44 60 L32 60
+               L46 40 L36 40
+               L48 22 L45 22 Z"/>
+    </symbol>
+  </defs>
+
+  <!-- Background is transparent; shapes are filled with solid color. -->
+  <g fill="#2DD4BF">
+    <!-- Back row (darker, smaller) -->
+    <g opacity="0.9">
+      <use href="#pine" x="-30" y="110" transform="scale(1.1,1.1)"/>
+      <use href="#pine" x="60"  y="120" transform="scale(1.0,1.0)"/>
+      <use href="#pine" x="140" y="110" transform="scale(1.15,1.15)"/>
+      <use href="#pine" x="230" y="125" transform="scale(0.95,0.95)"/>
+      <use href="#pine" x="310" y="115" transform="scale(1.1,1.1)"/>
+      <use href="#pine" x="390" y="120" transform="scale(1.0,1.0)"/>
+      <use href="#pine" x="470" y="110" transform="scale(1.2,1.2)"/>
+      <use href="#pine" x="560" y="125" transform="scale(0.95,0.95)"/>
+      <use href="#pine" x="640" y="115" transform="scale(1.1,1.1)"/>
+      <use href="#pine" x="720" y="122" transform="scale(1.0,1.0)"/>
+      <use href="#pine" x="800" y="112" transform="scale(1.15,1.15)"/>
+      <use href="#pine" x="880" y="120" transform="scale(1.0,1.0)"/>
+      <use href="#pine" x="960" y="110" transform="scale(1.2,1.2)"/>
+      <use href="#pine" x="1045" y="122" transform="scale(1.0,1.0)"/>
+      <use href="#pine" x="1125" y="112" transform="scale(1.15,1.15)"/>
+    </g>
+
+    <!-- Front row (taller, overlaps) -->
+    <use href="#pine" x="-15" y="135" transform="scale(1.35,1.35)"/>
+    <use href="#pine" x="85"  y="145" transform="scale(1.25,1.25)"/>
+    <use href="#pine" x="165" y="140" transform="scale(1.4,1.4)"/>
+    <use href="#pine" x="260" y="150" transform="scale(1.2,1.2)"/>
+    <use href="#pine" x="335" y="140" transform="scale(1.35,1.35)"/>
+    <use href="#pine" x="420" y="148" transform="scale(1.25,1.25)"/>
+    <use href="#pine" x="505" y="140" transform="scale(1.42,1.42)"/>
+    <use href="#pine" x="600" y="150" transform="scale(1.22,1.22)"/>
+    <use href="#pine" x="675" y="140" transform="scale(1.36,1.36)"/>
+    <use href="#pine" x="760" y="148" transform="scale(1.25,1.25)"/>
+    <use href="#pine" x="845" y="140" transform="scale(1.42,1.42)"/>
+    <use href="#pine" x="935" y="150" transform="scale(1.24,1.24)"/>
+    <use href="#pine" x="1015" y="140" transform="scale(1.36,1.36)"/>
+    <use href="#pine" x="1100" y="148" transform="scale(1.28,1.28)"/>
+  </g>
+
+  <!-- Ground strip to close the silhouette at the bottom -->
+  <rect x="0" y="270" width="1200" height="30" fill="#2DD4BF" />
+</svg>
