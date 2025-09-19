@@ -14,21 +14,23 @@ export default function ThreadPageLayout({
   children,
 }: ThreadPageProps) {
   return (
-    <div className="h-screen w-screen bg-neutral-100 text-neutral-900 grid grid-rows-[48px_1fr_48px] md:grid-cols-[1fr_400px] overflow-hidden">
-      {/* ヘッダー (全幅) */}
-      <header className="row-start-1 col-span-full h-12 bg-teal-600 text-white flex items-center px-4 font-semibold text-sm md:text-base shadow">
+    <div className="h-screen w-screen bg-neutral-100 text-neutral-900 flex flex-col overflow-hidden md:grid md:grid-rows-[48px_1fr_48px] md:grid-cols-[1fr_400px]">
+      {/* ヘッダー: モバイル/PC 共通先頭 */}
+      <header className="order-1 h-12 bg-teal-600 text-white flex items-center px-4 font-semibold text-sm md:text-base shadow md:row-start-1 md:col-span-full">
         {renderHeader()}
       </header>
-      {/* 左メイン領域 */}
-      <div className="row-start-2 col-start-1 hidden md:block relative">
+      {/* モバイルでは非表示 / md以上で左メイン (スレッド可視領域) */}
+      <div className="hidden md:block relative overflow-hidden md:row-start-2 md:col-start-1">
         {children}
       </div>
-      {/* 右: 投稿リスト + 入力フォーム (フッター行まで縦に伸長) */}
-      <div className="row-start-2 row-span-2 md:col-start-2">
+      {/* ナビゲーション+投稿リスト: モバイルでは中央可変領域（flex-1） */}
+      <div className="order-2 flex-1 overflow-hidden md:row-start-2 md:row-span-2 md:col-start-2">
         {renderNavigation()}
       </div>
-      {/* フッター (左側のみに配置) */}
-      <footer className="row-start-3 col-start-1">{renderFooter()}</footer>
+      {/* フッター: モバイルでは最後、md以上では左下 */}
+      <footer className="order-3 md:order-none md:row-start-3 md:col-start-1">
+        {renderFooter()}
+      </footer>
     </div>
   );
 }

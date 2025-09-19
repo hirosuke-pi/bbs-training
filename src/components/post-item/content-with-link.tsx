@@ -1,5 +1,6 @@
 "use client";
 import reactStringReplace from "react-string-replace";
+import { scrollToPostItem } from "./scroll-to-post-item";
 
 const urlRegExp = /(https?:\/\/\S+)/g;
 const replyRegExp = />>([0-9]+)/g; // レス番号参照
@@ -27,14 +28,9 @@ export const ContentWithLinks = ({ content }: { content: string }) => {
           className="text-teal-600 hover:underline"
           onClick={(e) => {
             e.preventDefault();
-            const el = document.getElementById(`post-${targetIndex}`);
-            if (el) {
-              el.scrollIntoView({ behavior: "smooth", block: "nearest" });
-              el.classList.add("ring", "ring-teal-400");
-              setTimeout(() => {
-                el.classList.remove("ring", "ring-teal-400");
-              }, 1200);
-              history.replaceState(null, "", `#post-${targetIndex}`);
+            const postElement = document.getElementById(`post-${targetIndex}`);
+            if (postElement) {
+              scrollToPostItem(postElement, targetIndex);
             }
           }}
         >

@@ -14,6 +14,7 @@ export function useThreadItemQuery(threadId: string) {
       const data = await response.json();
       return data.data;
     },
+    refetchInterval: 5000,
   });
   return { data: data, isPending };
 }

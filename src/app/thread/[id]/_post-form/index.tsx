@@ -41,7 +41,7 @@ export function PostForm({ threadId }: Props) {
             </div>
           </Accordion.Trigger>
         </Accordion.Header>
-        <Accordion.Content className="overflow-hidden transition data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down  h-[300px]">
+        <Accordion.Content className="overflow-hidden transition data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down h-[340px] md:h-[300px]">
           <form onSubmit={handleSubmit} className="p-3 space-y-2">
             <textarea
               className="w-full resize-y rounded-md border border-neutral-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 min-h-[120px]"

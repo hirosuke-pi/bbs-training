@@ -11,7 +11,13 @@ import {
 import { Toolbar } from "./toolbar";
 import { ZoomMeter } from "./zoom-meter";
 
-export const MermaidViewer = ({ code }: { code: string }) => {
+type Props = {
+  code: string;
+  children?: React.ReactNode;
+  onClickSvgElement?: (event: PointerEvent) => void;
+};
+
+export const MermaidViewer = ({ code, onClickSvgElement, children }: Props) => {
   const id = useId();
   const outputRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGElement>(null);
@@ -28,17 +34,42 @@ export const MermaidViewer = ({ code }: { code: string }) => {
 
   const render = useCallback(async () => {
     if (outputRef.current && code) {
+      outputRef.current.innerHTML = "";
       try {
-        const { svg } = await mermaid.render(id, code);
+        mermaid.initialize({
+          startOnLoad: true,
+          securityLevel: "loose",
+          htmlLabels: true,
+          theme: "forest",
+          logLevel: 5,
+          suppressErrorRendering: true,
+        });
+        const { svg } = await mermaid.render(`mermaid-${Date.now()}`, code); // 再レンダーされるたびに要素が増えていくので考え直す
         outputRef.current.innerHTML = svg;
 
         const svgElement = outputRef.current.querySelector("svg");
         if (svgElement) {
           svgRef.current = svgElement;
+          svgRef.current.style.transformOrigin = "0 0";
           svgElement.style.transition = isDragging
             ? "none"
             : "transform 0.2s ease";
         }
+        applyTransform();
+
+        console.log(svgElement);
+
+        if (isDragging) return;
+
+        svgElement?.addEventListener("click", (event) => {
+          onClickSvgElement?.(event);
+        });
+
+        return () => {
+          svgElement?.removeEventListener("click", (event) => {
+            onClickSvgElement?.(event);
+          });
+        };
       } catch (error) {
         console.error("Mermaid render error:", error);
         outputRef.current.innerHTML = "";
@@ -58,6 +89,10 @@ export const MermaidViewer = ({ code }: { code: string }) => {
   const handleWheel = (e: WheelEvent) => {
     const delta = e.deltaY > 0 ? 0.9 : 1.1;
     setZoom((prev) => Math.max(0.1, Math.min(5, prev * delta)));
+    setPosition((prev) => ({
+      x: prev.x - (e.clientX - prev.x) * (delta - 1),
+      y: prev.y - (e.clientY - prev.y) * (delta - 1),
+    }));
   };
 
   const handleMouseDown = useCallback(
@@ -102,16 +137,6 @@ export const MermaidViewer = ({ code }: { code: string }) => {
     applyTransform();
   }, [position, zoom, applyTransform]);
 
-  useEffect(() => {
-    mermaid.initialize({
-      startOnLoad: true,
-      securityLevel: "loose",
-      theme: "forest",
-      logLevel: 5,
-      suppressErrorRendering: true,
-    });
-  }, []);
-
   return code ? (
     <div className="relative w-full h-full overflow-hidden font-geist-sans">
       <Toolbar
@@ -134,6 +159,7 @@ export const MermaidViewer = ({ code }: { code: string }) => {
       >
         <div ref={outputRef} className="w-full h-full" />
       </div>
+      <div>{children}</div>
     </div>
   ) : null;
 };

@@ -1,9 +1,10 @@
 "use client";
 
 import PostItem from "@/components/post-item";
-import { Spinner } from "@/components/spinner";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useRef } from "react";
+import { FaArrowLeft } from "react-icons/fa";
 import ThreadPageLayout from "./_layout";
 import { PostForm } from "./_post-form";
 import { PostMermaidViewer } from "./post-mermaid-viewer";
@@ -26,7 +27,16 @@ export default function ThreadPage() {
   return (
     <ThreadPageLayout
       renderHeader={() => (
-        <h1 className="font-semibold truncate pr-4 text-xl">森林ちゃんねる</h1>
+        <Link href="/" className="py-2 hover:opacity-80">
+          <div className="flex items-center gap-4">
+            <div>
+              <FaArrowLeft />
+            </div>
+            <h1 className="font-semibold truncate pr-4 text-xl">
+              森林ちゃんねる
+            </h1>
+          </div>
+        </Link>
       )}
       renderNavigation={() => (
         <div className="flex flex-col border-l border-neutral-300 bg-neutral-50 h-screen">
@@ -70,7 +80,7 @@ export default function ThreadPage() {
         </div>
       )}
     >
-      {data ? <PostMermaidViewer {...data} /> : <Spinner />}
+      <PostMermaidViewer data={data} />
     </ThreadPageLayout>
   );
 }
