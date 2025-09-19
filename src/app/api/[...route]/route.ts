@@ -2,7 +2,10 @@ import { Hono } from "hono";
 import { CookieStore, sessionMiddleware } from "hono-sessions";
 import { handle } from "hono/vercel";
 import hello from "./hello";
-import thread from "./thread";
+import getThreadById from "./thread/[id]/get";
+import postThreadPost from "./thread/[id]/post";
+import getThreadAll from "./thread/all/get";
+import postThread from "./thread/post";
 
 const app = new Hono().basePath("/api");
 
@@ -17,7 +20,12 @@ app.use(
 );
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const route = app.route("/thread", thread).route("/hello", hello);
+const route = app
+  .route("/thread", postThread)
+  .route("/thread/all", getThreadAll)
+  .route("/thread/:id", getThreadById)
+  .route("/thread/:id", postThreadPost)
+  .route("/hello", hello);
 export type HonoAppType = typeof route;
 
 export const GET = handle(app);
